@@ -26,64 +26,79 @@ class PokemonItemWidget extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: pokemon.baseColor!.withOpacity(0.8),
+                color: pokemon.baseColor!.withOpacity(0.9),
                 borderRadius: BorderRadius.circular(16)),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Stack(
+              children: [
+                Positioned(
+                    bottom: -15,
+                    right: -20,
+                    child: Opacity(
+                      opacity: 0.3,
+                      child: Image.asset(
+                        'assets/images/pokeball.png',
+                        height: 100,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    )),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Flexible(
-                        child: Text(
-                          pokemon.name,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              pokemon.name,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
+                            ),
+                          ),
+                          Text(
+                            '#${pokemon.num}',
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.6),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                          ),
+                        ],
                       ),
-                      Text(
-                        '#${pokemon.num}',
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.4),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14),
-                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: pokemon.type
+                                .map((e) => TypeWidget(
+                                      name: e,
+                                    ))
+                                .toList(),
+                          ),
+                          const Flexible(
+                              child: SizedBox(
+                            height: 100,
+                            width: 100,
+                          )),
+                        ],
+                      )
                     ],
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: pokemon.type
-                            .map((e) => TypeWidget(
-                                  name: e,
-                                ))
-                            .toList(),
-                      ),
-                      Flexible(
-                          child: Container(
-                        height: 100,
-                        width: 100,
-                      )),
-                    ],
-                  )
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Positioned(
             bottom: 12,
             right: 2,
+            height: 102,
             child: Image.network(
               pokemon.image,
-              height: 120,
             ),
           ),
         ],

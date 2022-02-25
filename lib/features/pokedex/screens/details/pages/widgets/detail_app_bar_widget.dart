@@ -19,15 +19,22 @@ class DetailAppBarWidget extends StatelessWidget {
       backgroundColor: pokemon.baseColor,
       leading: IconButton(
         onPressed: onBack,
-        icon: Icon(Icons.chevron_left),
+        icon: const Icon(Icons.chevron_left),
       ),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child:
+              InkWell(onTap: () {}, child: const Icon(Icons.favorite_border)),
+        )
+      ],
       centerTitle: false,
       title: AnimatedOpacity(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         opacity: isOnTop ? 0 : 1,
         child: Text(
           pokemon.name,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.white,

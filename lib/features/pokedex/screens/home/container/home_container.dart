@@ -21,7 +21,7 @@ class HomeContainer extends StatelessWidget {
       future: repository.getAllPokemons(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return HomeLoading();
+          return const HomeLoading();
         }
 
         if (snapshot.connectionState == ConnectionState.done &&

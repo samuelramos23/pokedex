@@ -45,14 +45,12 @@ class _DetailContainerState extends State<DetailContainer> {
       future: _future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return PoLoading();
+          return const PoLoading();
         }
 
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
-          if (_pokemon == null) {
-            _pokemon = widget.arguments.pokemon;
-          }
+          _pokemon ??= widget.arguments.pokemon;
           return DetailPage(
             pokemon: _pokemon!,
             list: snapshot.data!,

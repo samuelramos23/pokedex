@@ -11,47 +11,62 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        centerTitle: false,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Text(
-            'Pokedex',
-            style: TextStyle(color: Colors.black, fontSize: 26),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.menu,
-                color: Colors.black,
-              ),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          centerTitle: false,
+          title: const Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              'Pokedex',
+              style: TextStyle(color: Colors.black, fontSize: 26),
             ),
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          children: list
-              .map(
-                (e) => PokemonItemWidget(
-                  pokemon: e,
-                  onTap: onItemTap,
-                  index: list.indexOf(e),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.menu,
+                  color: Colors.black,
                 ),
-              )
-              .toList(),
+              ),
+            ),
+          ],
         ),
-      ),
-    );
+        body: Stack(
+          children: <Widget>[
+            Positioned(
+              top: MediaQuery.of(context).padding.top - 240 / 2.9,
+              right: -90,
+              child: Opacity(
+                child: Image.asset(
+                  'assets/images/pokeball_dark.png',
+                  height: 240,
+                  width: 240,
+                ),
+                opacity: 0.2,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                children: list
+                    .map(
+                      (e) => PokemonItemWidget(
+                        pokemon: e,
+                        onTap: onItemTap,
+                        index: list.indexOf(e),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ],
+        ));
   }
 }
